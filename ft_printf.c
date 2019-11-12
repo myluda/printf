@@ -27,11 +27,26 @@ int ft_printf(const char *str, ...)
             {
                 ft_putchar(va_arg(arg,int));
             }
-            if(str[i + 1] == 'd')
+            if(str[i + 1] == 'd' || str[i + 1] == 'i')
             {
                 ft_putstr((ft_itoa(va_arg(arg, int))));
             }
-            if(str[i + 1] ==)
+            if(str[i + 1] == 'p')
+            {
+                ft_putstr(ft_hexa(va_arg(arg,unsigned long long)));
+            }
+            if(str[i + 1] == 's')
+            {
+                ft_putstr(va_arg(arg,char *));
+            }
+            if(str[i + 1] == 'u')
+            {
+                ft_putstr(ft_utoa(va_arg(arg,unsigned int)));
+            }
+            if(str[i + 1] == 'x')
+            {
+                
+            }
         }
         
         i++;
@@ -40,5 +55,7 @@ int ft_printf(const char *str, ...)
 }
 int main()
 {
-ft_printf("%d",-120);
+    int a = 51544841;
+    printf("%u\n",a);
+    ft_printf("%u",a);
 }

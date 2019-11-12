@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajrhou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 12:19:32 by ayajrhou          #+#    #+#             */
-/*   Updated: 2019/10/09 15:36:13 by ayajrhou         ###   ########.fr       */
+/*   Created: 2019/10/09 15:38:00 by ayajrhou          #+#    #+#             */
+/*   Updated: 2019/10/09 15:41:48 by ayajrhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		ft_isalpha(int str)
+int		ft_tolower(int c)
 {
-	int i;
-
-	i = 0;
-	if (str >= 'A' && str <= 'Z')
+	if (c >= 'A' && c <= 'Z')
 	{
-		return (1);
+		return (c + 32);
 	}
-	else if (str >= 'a' && str <= 'z')
-	{
-		return (2);
-	}
-	else
-	{
-		return (0);
-	}
+	return (c);
 }

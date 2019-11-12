@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajrhou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 12:19:32 by ayajrhou          #+#    #+#             */
-/*   Updated: 2019/10/09 15:36:13 by ayajrhou         ###   ########.fr       */
+/*   Created: 2019/11/12 17:50:28 by ayajrhou          #+#    #+#             */
+/*   Updated: 2019/11/12 17:51:22 by ayajrhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-
-int		ft_isalpha(int str)
+int		ft_strlen(char *str)
 {
 	int i;
 
 	i = 0;
-	if (str >= 'A' && str <= 'Z')
+	while(str[i] != '\0')
 	{
-		return (1);
+		i++;
 	}
-	else if (str >= 'a' && str <= 'z')
-	{
-		return (2);
-	}
-	else
-	{
-		return (0);
-	}
+	return (i);
 }

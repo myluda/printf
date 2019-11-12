@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajrhou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 12:19:32 by ayajrhou          #+#    #+#             */
-/*   Updated: 2019/10/09 15:36:13 by ayajrhou         ###   ########.fr       */
+/*   Created: 2019/10/12 13:39:51 by ayajrhou          #+#    #+#             */
+/*   Updated: 2019/10/21 22:07:35 by ayajrhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		ft_isalpha(int str)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int i;
+	int		i;
+	int		k;
+	char	*s12;
 
+	k = 0;
 	i = 0;
-	if (str >= 'A' && str <= 'Z')
+	if (!(s1))
+		return (NULL);
+	if (!(s12 = malloc(ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1)))
 	{
-		return (1);
+		return (NULL);
 	}
-	else if (str >= 'a' && str <= 'z')
+	while (s1[i] != '\0')
 	{
-		return (2);
+		s12[i] = s1[i];
+		i++;
 	}
-	else
+	while (s2[k] != '\0')
 	{
-		return (0);
+		s12[i] = s2[k];
+		i++;
+		k++;
 	}
+	s12[i] = '\0';
+	return (s12);
 }
