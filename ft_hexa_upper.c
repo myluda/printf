@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_hexa.c                                          :+:      :+:    :+:   */
+/*   ft_hexa_upper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajrhou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/12 17:03:45 by ayajrhou          #+#    #+#             */
-/*   Updated: 2019/11/12 17:20:39 by ayajrhou         ###   ########.fr       */
+/*   Created: 2019/11/13 17:54:57 by ayajrhou          #+#    #+#             */
+/*   Updated: 2019/11/13 17:54:58 by ayajrhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int        calc_leng(unsigned long long c)
+static int      calc_leng(unsigned long long c)
 {
     int count;
 
@@ -50,7 +50,7 @@ static char    *ft_strrev(char *str)
     return (str);
 }
 
-char     *ft_hexa(unsigned long long c)
+char     *ft_hexa_upper(unsigned long long c)
 {
     int cal;
     char *hexa;
@@ -65,11 +65,11 @@ char     *ft_hexa(unsigned long long c)
         remainder = c % 16;
         if (remainder < 10)
         {
-            hexa[i] = ft_tolower(48 + remainder);
+            hexa[i] = 48 + remainder;
         }
         else
         {
-            hexa[i] = ft_tolower(55 + remainder);
+            hexa[i] = 55 + remainder;
         }
         c = c / 16;
         i++;

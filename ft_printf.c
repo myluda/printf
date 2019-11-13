@@ -33,7 +33,7 @@ int ft_printf(const char *str, ...)
             }
             if(str[i + 1] == 'p')
             {
-                ft_putstr(ft_hexa(va_arg(arg,unsigned long long)));
+                ft_putstr(ft_strjoin("0x",(ft_hexa(va_arg(arg,unsigned long long)))));
             }
             if(str[i + 1] == 's')
             {
@@ -45,7 +45,11 @@ int ft_printf(const char *str, ...)
             }
             if(str[i + 1] == 'x')
             {
-                
+                ft_putstr(ft_hexa(va_arg(arg,unsigned int)));
+            }
+            if(str[i + 1] == 'X')
+            {
+                ft_putstr(ft_hexa_upper(va_arg(arg,unsigned int)));
             }
         }
         
@@ -55,7 +59,7 @@ int ft_printf(const char *str, ...)
 }
 int main()
 {
-    int a = 51544841;
-    printf("%u\n",a);
-    ft_printf("%u",a);
+    unsigned int a = 484817151;
+    printf("%4.3d\n",6);
+    ft_printf("%4.3d\n",6);
 }

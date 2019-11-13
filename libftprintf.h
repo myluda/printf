@@ -17,5 +17,5 @@ char	        *ft_strjoin(char const *s1, char const *s2);
 char			*ft_itoa(int n);
 void            ft_putstr(char *str);
 void            ft_putchar(char c);
-
+char            *ft_hexa_upper(unsigned long long c);
 #endif

@@ -60,12 +60,6 @@ static char	*ft_stock(unsigned int n, char *dest)
 
 	i = 0;
 	f = n;
-	if (n < 0)
-	{
-		i = 1;
-		dest[0] = '-';
-		f = f * (-1);
-	}
 	while (f != 0)
 	{
 		s = f % 10 + '0';
