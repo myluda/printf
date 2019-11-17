@@ -56,22 +56,32 @@ int     width(char *str, int i)
     }
     return (0);
 }
-int     precision_leng(char *str,int i)
+int     precision_leng(char *str,int *i)
 {
     int precision;
-    if(str[i] == '.')
-    {
-        precision = ft_atoi(&str[i + 1]);
+        while(str[*i + 1] == '0')
+        {
+            *i = *i + 1;
+        }
+        precision = ft_atoi(&str[*i + 1]);
         return leng(precision);
-    }
+
     return(0);
 }
-int     precision(char *str,int i)
+//char    *switch
+int     precision(char *str,int *i)
 {
     int precision;
-    if(str[i] == '.')
+    if(str[*i] == '.')
     {
-        precision = ft_atoi(&str[i + 1]);
+        while(str[*i + 1] == '0')
+        {
+            *i = *i + 1;
+        } 
+        if (str[*i + 1] >= '0' && str[*i + 1] <= '9')
+            precision = ft_atoi(&str[*i + 1]);
+        else
+            precision = 0;
         return(precision);
     }
     return(0);
@@ -82,19 +92,25 @@ char	*ft_strrev_minus(char *str)
 	int		k;
 	int		j;
 	char	temp;
-
+    
+    k = 0;
 	i = 0;
 	while (str[i] != '-' && str[i] != '\0')
 	{
 		i++;
 	}
+    while(str[k] == ' ')
+    {
+        k++;
+    }
     if(str[i] == '\0')
     {
         return (str);
     }
     temp = str[i];
-    str[i] = str[0];
-    str[0] = temp;
+    str[i] = str[k - 1];
+    str[k - 1] = temp;
+    str[i] = '0';
 	return (str);
 }
 char    *ft_print_zero(char *s,int count,int precision)
@@ -111,12 +127,13 @@ char    *ft_print_zero(char *s,int count,int precision)
     }
     return str;
 }
-char    *ft_print_spaces(char *s,int widthh,int preci)
+char    *ft_print_spaces(char *s,int widthh,int preci,int *preci1)
 {
     char *str;
     int  c;
     int d;
-
+    int remaind;
+    remaind = widthh;
     d = ft_strlen(s);
     c = widthh - preci;
     str = malloc(sizeof(char) * widthh + 1);
@@ -131,6 +148,8 @@ char    *ft_print_spaces(char *s,int widthh,int preci)
         str[widthh--] = ' ';
     }
     str[widthh] = ' ';
+    if(str[remaind - 1] == '0' && (str[remaind - 2] < '0' || s[remaind - 2] > '9') && *preci1 != 1)
+        str[remaind - 1] = ' ';
     str = ft_strrev_minus(str);
     return str;
 }
@@ -147,11 +166,12 @@ char    *ft_print_spaces_zeroes(char *s,int widthh,int preci)
     str = malloc(sizeof(char));
     if (s[0] == '0' && s[1] == '\0')
     {
-        s[0] = '\0';
+        str[0] = '0';
     }
-    str[0] = '\0';
+    str[1] = '\0';
     return str;
 }
+
 int ft_printf(const char *str1, ...)
 {
     int i;
@@ -163,6 +183,7 @@ int ft_printf(const char *str1, ...)
     int preci;
     int r;
     int widthh;
+    int preci1;
     va_list arg;
     va_start(arg, str1);
     str = (char *)str1;
@@ -174,7 +195,7 @@ int ft_printf(const char *str1, ...)
         if(str[i] == '%')
         {
                 flag = flags(str,i);
-                if (flag == 0)
+                if (flag == 0 && str[i + 1] != 'd')
                 {
                     i++;
                 }
@@ -184,16 +205,16 @@ int ft_printf(const char *str1, ...)
                     i = i + leng(widthh);
                 } 
                 
-                preci = precision(str,i);
+                preci = precision(str,&i);
                 if (preci != 0)
                 {
-                    i = i + precision_leng(str,i);
+                    i = i + precision_leng(str,&i);
                 }
                 if(str[i + 1] == 'c')
                 {
                     ft_putchar(va_arg(arg,int));
                 }
-                if (widthh && !preci)
+                if (widthh && !preci && str[i] != '.' && str[i] != '0')
                     i = i - 1;
                 if(str[i + 1] == 'd' || str[i + 1] == 'i')
                 {
@@ -207,25 +228,27 @@ int ft_printf(const char *str1, ...)
                     if ((s[0] == '0' && s[1] == '\0') && preci == 0 && widthh == 0)
                     {
                       s = ft_print_spaces_zeroes(s,count,preci);
-                      printf("%s",s);
                       return 0;
                     } 
                     else if (count >= preci && count > widthh)
                     {
                         ft_putstr(s);
                     }
-                    else if ((preci > count) && (preci > widthh))
+                    else if ((preci > count) && (preci >= widthh))
                     {
-                        printf("%s",ft_print_zero(s,count,preci));
+                        s = ft_print_zero(s,count,preci);
+                        s = ft_strrev_minus(s);
+                        printf("%s",ft_strjoin("-",s));
                     }
                     else if ((widthh > count) && (widthh > preci))
                     {
+                        preci1 = preci;
                         if (count > preci)
                         {
                             preci = count;
                         } 
                         s = ft_print_zero(s,count,preci);
-                        printf("%s",ft_print_spaces(s,widthh,preci));
+                        printf("%s",ft_print_spaces(s,widthh,preci,&preci1));
                     } 
                     else if(count >= widthh)
                     {
@@ -260,7 +283,9 @@ int ft_printf(const char *str1, ...)
 }
 int main()
 {
-    int a = 59999;
-    printf("%3.9d\n", a);
-    ft_printf("%3.9d\n", a);
+    int a = -3;
+    printf("%30.7d\n", a);
+    ft_printf("%30.7d", a);
+    printf("\n");
+    //printf("\n");
 }
