@@ -90,7 +90,7 @@ char	*ft_strrev_minus(char *str)
 {
 	int		i;
 	int		k;
-	int		j;
+	// int		j;
 	char	temp;
     
     k = 0;
@@ -107,10 +107,15 @@ char	*ft_strrev_minus(char *str)
     {
         return (str);
     }
+    if (str[i] == '-')
+    {
     temp = str[i];
     str[i] = str[k - 1];
     str[k - 1] = temp;
     str[i] = '0';
+    if(str[0] == '0')
+        str = ft_strjoin("-",str);
+    }
 	return (str);
 }
 char    *ft_print_zero(char *s,int count,int precision)
@@ -135,7 +140,7 @@ char    *ft_print_spaces(char *s,int widthh,int preci,int *preci1)
     int remaind;
     remaind = widthh;
     d = ft_strlen(s);
-    c = widthh - preci;
+    //c = widthh;
     str = malloc(sizeof(char) * widthh + 1);
     while(d >= 0)
     {
@@ -148,9 +153,26 @@ char    *ft_print_spaces(char *s,int widthh,int preci,int *preci1)
         str[widthh--] = ' ';
     }
     str[widthh] = ' ';
-    if(str[remaind - 1] == '0' && (str[remaind - 2] < '0' || s[remaind - 2] > '9') && *preci1 != 1)
-        str[remaind - 1] = ' ';
+     if(str[remaind - 1] == '0' && (str[remaind - 2] < '0' || s[remaind - 2] > '9') && *preci1 == 0)
+        str[remaind - 1] = ' '; 
     str = ft_strrev_minus(str);
+    return str;
+}
+char    *ft_only_zero(char *s)
+{
+    char *str;
+    int  c;
+    int d;
+    int i;
+
+    i = 0;
+    d = ft_strlen(s);
+    str = malloc(sizeof(char));
+    if (s[0] == '0' && s[1] == '\0')
+    {
+        str[0] = '\0';
+    }
+    str[1] = '\0';
     return str;
 }
 char    *ft_print_spaces_zeroes(char *s,int widthh,int preci)
@@ -175,13 +197,13 @@ char    *ft_print_spaces_zeroes(char *s,int widthh,int preci)
 int ft_printf(const char *str1, ...)
 {
     int i;
-    int f;
+    // int f;
     char *str;
     int flag;
     int count;
     char *s;
     int preci;
-    int r;
+    // int r;
     int widthh;
     int preci1;
     va_list arg;
@@ -224,11 +246,14 @@ int ft_printf(const char *str1, ...)
                     {
                         return (0);
                     }*/
-                    
-                    if ((s[0] == '0' && s[1] == '\0') && preci == 0 && widthh == 0)
+                    if (str[i] == '.' && (s[0] == '0' && s[1] == '\0') && widthh == 0)
+                    {
+                        printf("%s",ft_only_zero(s));
+                    }
+                    else if ((s[0] == '0' && s[1] == '\0') && preci == 0 && widthh == 0)
                     {
                       s = ft_print_spaces_zeroes(s,count,preci);
-                      return 0;
+                      printf("%s",s);
                     } 
                     else if (count >= preci && count > widthh)
                     {
@@ -238,7 +263,7 @@ int ft_printf(const char *str1, ...)
                     {
                         s = ft_print_zero(s,count,preci);
                         s = ft_strrev_minus(s);
-                        printf("%s",ft_strjoin("-",s));
+                        printf("%s",s);
                     }
                     else if ((widthh > count) && (widthh > preci))
                     {
@@ -248,7 +273,8 @@ int ft_printf(const char *str1, ...)
                             preci = count;
                         } 
                         s = ft_print_zero(s,count,preci);
-                        printf("%s",ft_print_spaces(s,widthh,preci,&preci1));
+                        s = ft_print_spaces(s,widthh,preci,&preci1);
+                        printf("%s",s);
                     } 
                     else if(count >= widthh)
                     {
@@ -283,9 +309,9 @@ int ft_printf(const char *str1, ...)
 }
 int main()
 {
-    int a = -3;
-    printf("%30.7d\n", a);
-    ft_printf("%30.7d", a);
+    int a = -99;
+    printf("%.10d\n", a);
+    ft_printf("%.10d", a);
     printf("\n");
     //printf("\n");
 }
