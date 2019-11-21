@@ -276,11 +276,8 @@ char    *ft_print_spaces_zeroes(char *s,char *str,int i)
     }
     return s;
 }
-int     ft_indices(char **str,int *flag,va_list arg)
+int     ft_indices(char **str,int *flag,va_list arg,int i)
 {
-    int i;
-
-    i = 0;
     *flag = flags(*str,i);
     if(((*str)[i + 1] == '-') || ((*str)[i + 1] == '0'))
     {
@@ -327,11 +324,26 @@ int     ft_indices(char **str,int *flag,va_list arg)
             i = i + precision_leng(*str,&i);
         }
     }
-    if ((*str)[i] == 'd')
+    if ((*str)[i] == 'd' || (*str)[i] == 's')
         i = i - 1;
     return(i);
 }
+char        *ft_print_preci(char *s,int preci1)
+{
+    int i;
 
+    i = 0;
+    char *str;
+    str = malloc(sizeof(char) * preci1);
+    while(preci1 > 0)
+    {
+        str[i] = s[i];
+        i++;
+        preci1--;
+    }
+    str[i] = '\0';
+    return str;
+}
 char        *ft_print_str(char *s,int preci1,char *str,int i)
 {
      if ((s[0] == '0' && s[1] == '\0') && preci == 0 && widthh == 0)
@@ -344,6 +356,24 @@ char        *ft_print_str(char *s,int preci1,char *str,int i)
         s = ft_only_zero(s);
         return s;
     }
+    else if (str[i + 1] != '.' && widthh && preci1 == 0)
+    {
+        s = ft_print_spaces(s,&preci1,i,str);
+        return s;
+    } 
+    else if (str[i + 1] == 's')
+    {
+        preci1 = preci;
+      /*  if (count > preci)
+        {
+        preci = count;
+        }
+       */    
+            s = ft_print_preci(s,preci1);
+        if (widthh >= preci1)
+            s = ft_print_spaces(s,&preci1,i,str);
+        return s;
+    } 
     else if ((widthh > count) && (widthh > preci))
     {
         preci1 = preci;
@@ -387,14 +417,14 @@ int         ft_printf(const char *str1, ...)
 
     while(str[i] != '\0')
     {
-        /*while(str[i] != '%')
+        while(str[i] != '%')
         {
             ft_putchar(str[i]);
             i++;
-        } */
+        }
         if(str[i] == '%')
         {
-            i = ft_indices(&str,&flag,arg); 
+            i = ft_indices(&str,&flag,arg,i); 
                 if(str[i + 1] == 'c')
                 {
                     ft_putchar(va_arg(arg,int));
@@ -413,7 +443,13 @@ int         ft_printf(const char *str1, ...)
                 }
                 if(str[i + 1] == 's')
                 {
-                    ft_putstr(va_arg(arg,char *));
+                   s = va_arg(arg,char *);
+                   if (s == NULL)
+                   {
+                      s = ft_strdup("(null)");
+                   }
+                   count = ft_strlen(s);
+                        ft_putstr(ft_print_str(s,preci1,str,i));
                 }
                 if(str[i + 1] == 'u')
                 {
@@ -421,25 +457,35 @@ int         ft_printf(const char *str1, ...)
                     count = ft_strlen(s);
                     ft_putstr(ft_print_str(s,preci1,str,i));
                 }
-                if(str[i] == 'x')
+                if(str[i + 1] == 'x')
                 {
                     ft_putstr(ft_hexa(va_arg(arg,unsigned int)));
+                    count = ft_strlen(s);
+                    ft_putstr(ft_print_str(s,preci1,str,i));
                 }
-                if(str[i] == 'X')
+                if(str[i + 1] == 'X')
                 {
                     ft_putstr(ft_hexa_upper(va_arg(arg,unsigned int)));
+                    count = ft_strlen(s);
+                    ft_putstr(ft_print_str(s,preci1,str,i));
                 }
-                i++;
         }
-        i++;
+        while(str[i] != '\0')
+        {
+            ft_putchar(str[i + 2]);
+            i++;
+        }
     }
     return 0;
 }
 int main()
 {
-    int a = 5;
-    printf("%6.40p\n",&a);
-    ft_printf("%6.40p",&a);
+    char *a = "abcdef";
+   // int a = 6;
+   // int c = 5;
+    printf("\nayoub%-10.10smohamedoiddjiojejdw",a);
+    //printf("%012.15d",NULL);
+    ft_printf("ayoub%-10.10smohamedoiddjiojejdw\n",a);
     // printf("b");
     // printf("\n");
     //printf("\n");

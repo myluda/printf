@@ -20,4 +20,6 @@ void            ft_putchar(char c);
 char            *ft_hexa_upper(unsigned long long c);
 int				ft_atoi(const char *str);
 size_t		    ft_strlcat(char *dst, const char *src, size_t size);
+char		    *ft_strdup(const char *src);
+
 #endif
