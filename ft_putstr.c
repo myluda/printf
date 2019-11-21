@@ -12,7 +12,7 @@
 
 #include "libftprintf.h"
 
-void ft_putstr(char *str)
+void ft_putstr(char *str,int *indice)
 {
     int i;
 
@@ -21,5 +21,6 @@ void ft_putstr(char *str)
     {
         write(1,&str[i],1);
         i++;
+        *indice = *indice + 1;
     }
 }
