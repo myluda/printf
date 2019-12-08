@@ -106,6 +106,7 @@ char		*ft_itoa(int n)
 {
 	int		len;
 	char	*dest;
+	char	*tmp;
 
 	len = ft_length(n);
 	if (n < 0)
@@ -127,5 +128,7 @@ char		*ft_itoa(int n)
 			return (0);
 	}
 	dest = ft_stock(n, dest);
+	tmp = dest;
+	free(tmp);
 	return (n < 0 ? ft_strrev(dest) : ft_strrev1(dest));
 }

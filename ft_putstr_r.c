@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_r.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajrhou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 02:52:55 by ayajrhou          #+#    #+#             */
-/*   Updated: 2019/12/05 02:53:04 by ayajrhou         ###   ########.fr       */
+/*   Created: 2019/12/06 20:08:38 by ayajrhou          #+#    #+#             */
+/*   Updated: 2019/12/06 20:08:44 by ayajrhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char    	*ft_strcpyy(const char *s1, char *s2)
+void ft_putstr_r(char *str,int *indice)
 {
-	char	*str;
-	int		i;
+	int i;
 
-	str = (char *)s1;
-	str = malloc(sizeof(char) * ft_strlen(s2) + 1);
 	i = 0;
-	while (s2[i])
+	write(1,"\0",1);
+	*indice = *indice + 1;
+	while(str[i + 1] != '\0')
 	{
-		str[i] = s2[i];
+		write(1,&str[i],1);
 		i++;
+		*indice = *indice + 1;
 	}
-	str[i] = s2[i];
-	return (str);
 }

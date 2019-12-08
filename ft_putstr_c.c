@@ -23,8 +23,9 @@ void ft_putstr_c(char *str,int *indice)
         i++;
         *indice = *indice + 1;
     }
-    if(str[i + 1] == '\0')
+    if(str[i + 1] == '\0' || str[i] == '\0')
     {
         write(1,"\0",1);
+        *indice = *indice + 1;
     }
 }

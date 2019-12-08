@@ -26,6 +26,7 @@ int		        ft_isalpha(int str);
 void            ft_putstr_c(char *str,int *indice);
 char            *ft_hexa_p(unsigned long long c);
 char            *ft_strcpyy(const char *s1, char *s2);
+void            ft_putstr_r(char *str,int *indice);
 
 
 #endif
