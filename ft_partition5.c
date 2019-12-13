@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_partition5.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajrhou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 12:19:32 by ayajrhou          #+#    #+#             */
-/*   Updated: 2019/10/09 15:36:13 by ayajrhou         ###   ########.fr       */
+/*   Created: 2019/12/08 08:00:12 by ayajrhou          #+#    #+#             */
+/*   Updated: 2019/12/08 08:00:17 by ayajrhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_isalpha(int str)
+void		pourcent(va_list arg, char *str, int preci1, int i)
 {
-	int i;
-
-	i = 0;
-	if (str >= 'A' && str <= 'Z')
-	{
-		return (1);
-	}
-	else if (str >= 'a' && str <= 'z')
-	{
-		return (2);
-	}
-	else
-	{
-		return (0);
-	}
+	if (str[i] == 'c')
+		pourcent_c(arg, str, preci1, i);
+	else if (str[i] == 'd' || str[i] == 'i' || str[i] == 'u'
+			|| str[i] == 'x' || str[i] == 'X' || str[i] == 's' || str[i] == 'p')
+		pourcent_dixu(arg, str, preci1, i);
 }

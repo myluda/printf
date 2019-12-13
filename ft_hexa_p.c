@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-static int        calc_leng(unsigned long long c)
+static int		calc_leng(unsigned long long c)
 {
-	int count;
+	int			count;
 
 	count = 0;
 	while (c != 0)
@@ -25,18 +25,16 @@ static int        calc_leng(unsigned long long c)
 	return (count);
 }
 
-static char    *ft_strrev(char *str)
+static char		*ft_strrev(char *str)
 {
-	int        i;
-	int        k;
-	int        j;
-	char    temp;
+	int			i;
+	int			k;
+	int			j;
+	char		temp;
 
 	i = 0;
 	while (str[i] != '\0')
-	{
 		i++;
-	}
 	k = 0;
 	j = i - 1;
 	while (k < j)
@@ -50,36 +48,28 @@ static char    *ft_strrev(char *str)
 	return (str);
 }
 
-char     *ft_hexa_p(unsigned long long c)
+char			*ft_hexa_p(unsigned long long c)
 {
-	int cal;
-	char *hexa;
-	int remainder;
-	int i;
+	char		*hexa;
+	int			cal;
+	int			remainder;
+	int			i;
 
 	i = 0;
 	cal = calc_leng(c);
 	hexa = malloc(sizeof(char) * cal + 1);
 	if (c == 0)
-    {
-        return ft_strdup("0");
-    }
+		return (ft_strdup("0"));
 	while (c != 0)
 	{
 		remainder = c % 16;
 		if (remainder < 10)
-		{
 			hexa[i] = ft_tolower(48 + remainder);
-		}
 		else
-		{
 			hexa[i] = ft_tolower(55 + remainder);
-		}
 		c = c / 16;
 		i++;
 	}
 	hexa[i] = '\0';
-
 	return (ft_strrev(hexa));
 }
-

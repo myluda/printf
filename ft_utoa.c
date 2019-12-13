@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static char	*ft_strrev1(char *str)
 {
@@ -40,7 +40,7 @@ static char	*ft_strrev1(char *str)
 static int	ft_length(unsigned int n)
 {
 	int i;
-	int s;
+	unsigned int s;
 
 	s = n;
 	i = 0;
@@ -71,10 +71,10 @@ static char	*ft_stock(unsigned int n, char *dest)
 	return (dest);
 }
 
-char		*ft_utoa(unsigned int n)
+char					*ft_utoa(unsigned int n)
 {
-	int		len;
-	char	*dest;
+	unsigned int		len;
+	char				*dest;
 
 	len = ft_length(n);
 	if (n == 0)
@@ -93,4 +93,3 @@ char		*ft_utoa(unsigned int n)
 	dest = ft_stock(n, dest);
 	return (ft_strrev1(dest));
 }
-

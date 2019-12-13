@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ayajrhou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 12:19:32 by ayajrhou          #+#    #+#             */
-/*   Updated: 2019/10/09 15:36:13 by ayajrhou         ###   ########.fr       */
+/*   Created: 2019/10/09 16:08:21 by ayajrhou          #+#    #+#             */
+/*   Updated: 2019/10/21 00:17:28 by ayajrhou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_isalpha(int str)
+char	*ft_strchr(char *str, int c)
 {
-	int i;
+	char	*place;
+	int		i;
+	int		k;
 
 	i = 0;
-	if (str >= 'A' && str <= 'Z')
+	place = 0;
+	k = ft_strlen(str);
+	while (i <= k)
 	{
-		return (1);
+		if (str[i] == c)
+		{
+			place = ((char *)&str[i]);
+			break ;
+		}
+		i++;
 	}
-	else if (str >= 'a' && str <= 'z')
-	{
-		return (2);
-	}
-	else
-	{
-		return (0);
-	}
+	return (place);
 }

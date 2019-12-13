@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-char    	*ft_strcpyy(const char *s1, char *s2)
+char		*ft_strcpyy(const char *s1, char *s2)
 {
 	char	*str;
 	int		i;

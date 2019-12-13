@@ -10,22 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-void ft_putstr_c(char *str,int *indice)
+void		ft_putstr_c(char *str, int *indice)
 {
-    int i;
+	int		i;
 
-    i = 0;
-    while(str[i + 1] != '\0')
-    {
-        write(1,&str[i],1);
-        i++;
-        *indice = *indice + 1;
-    }
-    if(str[i + 1] == '\0' || str[i] == '\0')
-    {
-        write(1,"\0",1);
-        *indice = *indice + 1;
-    }
+	i = 0;
+	while (str[i + 1] != '\0')
+	{
+		write(1, &str[i], 1);
+		i++;
+		*indice = *indice + 1;
+	}
+	if (str[i + 1] == '\0' || str[i] == '\0')
+	{
+		write(1, "\0", 1);
+		*indice = *indice + 1;
+	}
 }

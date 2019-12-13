@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-void    ft_putchar(char c,int *indice)
+void	ft_putchar(char c, int *indice)
 {
-    write(1,&c,1);
-    *indice = *indice + 1;
+	write(1, &c, 1);
+	*indice = *indice + 1;
 }

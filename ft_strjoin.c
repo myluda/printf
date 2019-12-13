@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char		*ft_strjoin(char const *s1, char const *s2)
 {
 	int		i;
 	int		k;
@@ -22,7 +22,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	if (!(s1))
 		return (NULL);
-		
 	if (!(s12 = malloc(ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1)))
 	{
 		return (NULL);

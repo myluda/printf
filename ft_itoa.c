@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-static char	*ft_strrev(char *str)
+static char			*ft_strrev(char *str)
 {
-	int		i;
-	int		k;
-	int		j;
-	char	temp;
+	int				i;
+	int				k;
+	int				j;
+	char			temp;
 
 	i = 1;
 	while (str[i] != '\0')
@@ -37,12 +37,12 @@ static char	*ft_strrev(char *str)
 	return (str);
 }
 
-static char	*ft_strrev1(char *str)
+static char			*ft_strrev1(char *str)
 {
-	int		i;
-	int		k;
-	int		j;
-	char	temp;
+	int				i;
+	int				k;
+	int				j;
+	char			temp;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -62,10 +62,10 @@ static char	*ft_strrev1(char *str)
 	return (str);
 }
 
-static int	ft_length(int n)
+static int			ft_length(int n)
 {
-	int i;
-	int s;
+	int				i;
+	int				s;
 
 	s = n;
 	i = 0;
@@ -77,7 +77,7 @@ static int	ft_length(int n)
 	return (i);
 }
 
-static char	*ft_stock(int n, char *dest)
+static char			*ft_stock(int n, char *dest)
 {
 	unsigned int	f;
 	int				i;
@@ -91,7 +91,7 @@ static char	*ft_stock(int n, char *dest)
 		dest[0] = '-';
 		f = f * (-1);
 	}
-	while (f != 0)
+	 while (f != 0)
 	{
 		s = f % 10 + '0';
 		f = f / 10;
@@ -102,11 +102,10 @@ static char	*ft_stock(int n, char *dest)
 	return (dest);
 }
 
-char		*ft_itoa(int n)
+char				*ft_itoa(int n)
 {
-	int		len;
-	char	*dest;
-	char	*tmp;
+	int				len;
+	char			*dest;
 
 	len = ft_length(n);
 	if (n < 0)
@@ -128,7 +127,5 @@ char		*ft_itoa(int n)
 			return (0);
 	}
 	dest = ft_stock(n, dest);
-	tmp = dest;
-	free(tmp);
 	return (n < 0 ? ft_strrev(dest) : ft_strrev1(dest));
 }
